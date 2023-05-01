@@ -1,14 +1,14 @@
 import { getApps, getApp, initializeApp } from "firebase/app"
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, deleteDoc, query, where } from "firebase/firestore"
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, deleteDoc, query, where } from "firebase/firestore/lite"
 import images from "../json/images.json"
 
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECTID,
+    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APPID
+    appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 
 const app_length = getApps().length > 0
@@ -29,6 +29,7 @@ export const feedImages = async () => {
         await deleteDoc(doc(db, "images", image.id))
     })
     // ADD NEW DOCS
+    console.log(images)
     images.forEach(async (image) => {
         const docRef = await doc(imagesCollection)
         await setDoc(docRef, { ...image, id: docRef.id })
