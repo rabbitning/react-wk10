@@ -2,9 +2,9 @@ import './App.css'
 import 'antd/dist/reset.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Home from './pages/Home'
-// import { feedImages } from './api'
+import { feedImages } from './api'
 
-// feedImages()
+feedImages()
 
 const queryClient = new QueryClient()
 
